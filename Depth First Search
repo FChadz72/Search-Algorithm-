@@ -1,0 +1,30 @@
+def dfs_search(graph, start, target, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+
+    print(f"Visiting: {start}")
+    if start == target:
+        print(f"Found target: {target}")
+        return True
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            found = dfs_search(graph, neighbor, target, visited)
+            if found:
+                return True
+    return False
+
+# Define the tree as an adjacency list
+graph = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [0, 5, 6],
+    3: [1],
+    4: [1],
+    5: [2],
+    6: [2]
+}
+
+# Run DFS to find node 5
+dfs_search(graph, 0, 5)
